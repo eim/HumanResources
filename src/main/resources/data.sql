@@ -1,0 +1,8 @@
+insert into CANDIDATE (NAME, DATE, DELETED) values ('Cand 1', CURRENT_TIMESTAMP(), FALSE);
+insert into CANDIDATE (NAME, DATE, DELETED) values ('Cand 2', CURRENT_TIMESTAMP(), FALSE);
+insert into CANDIDATE (NAME, DATE, DELETED) values ('Cand 3', CURRENT_TIMESTAMP(), FALSE);
+insert into CANDIDATE (NAME, DATE, DELETED) values ('Cand 4', CURRENT_TIMESTAMP(), FALSE);
+insert into CANDIDATE (NAME, DATE, DELETED) values ('Cand 5', CURRENT_TIMESTAMP(), FALSE);
+insert into CANDIDATE (NAME, DATE, DELETED) values ('Cand 6', CURRENT_TIMESTAMP(), FALSE);
+
+commit;
