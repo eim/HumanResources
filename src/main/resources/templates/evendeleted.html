@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Human Resources. All candidates even deleted.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<p>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Deleted</th>
+    </tr>
+
+    <div th:each="candidate : ${list}">
+        <tr>
+        <td>
+            <b><span th:text="${candidate.id}"></span></b>
+        </td>
+        <td>
+            <b><span th:text="${candidate.name}"></span></b>
+        </td>
+        <td>
+            <b><span th:text="${#calendars.format(candidate.date, 'dd.MM.yyyy HH:mm')}"></span></b>
+        </td>
+        <td>
+            <b><span th:text="${candidate.deleted}"></span></b>
+        </td>
+        </tr>
+    </div>
+
+</table>
+
+
+</p>
+
+<div>
+    <a href="#" data-th-href="@{/candidate}">Add a new candidate.</a>
+</div>
+
+<div>
+    <a href="#" data-th-href="@{/all}">Show all candidates.</a>
+</div>
+
+</body>
+
+</html>

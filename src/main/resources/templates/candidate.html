@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:color="http://www.w3.org/1999/xhtml">
+<head>
+    <title>New candidate form.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>new candidate</h1>
+<form action="#" th:action="@{/candidate}" th:object="${candidate}" method="post">
+    <p>Name: <input type="text" th:required="required" th:field="*{name}" /></p>
+    <p> <small>format: <label style="color: red">dd.MM.yyyy HH:mm</label></small></p>
+    <!--<p>Date: <input type="text" th:field="*{date}" th:required="required" pattern="\d{1,2}\.\d{1,2}\.\d{4}\ \d{1,2}:\d{2}" placeholder="dd.mm.yyyy HH:mm" /></p>-->
+    <p>Date: <input type="text" th:field="*{date}" th:required="required" pattern="(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4} (2[0-3]|[01][0-9]):[0-5][0-9]" placeholder="dd.MM.yyyy HH:mm" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stored candidate.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Saved result</h1>
+<p th:text="'Id: ' + ${candidate.id}" />
+<p th:text="'Content: ' + ${candidate.name}" />
+<p th:text="'Date: ' + ${#calendars.format(candidate.date, 'dd.MMM.yyyy HH:mm')}" />
+<a href="/candidate">Submit another candidate.</a>
+<a href="/all">Show list of the candidates.</a>
+<a href="/allevendeleted">Show list of the all even deleted candidates.</a>
+</body>
+</html>

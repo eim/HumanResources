@@ -46,12 +46,13 @@ public class CandidateService {
   }
 
   @Transactional
-  public void delete(BigInteger id) {
+  public Candidate delete(BigInteger id) {
     Candidate candidate = findOne(id);
     if (candidate != null) {
       candidate.setDeleted(true);
-      candidateRepository.save(candidate);
+      return candidateRepository.save(candidate);
     }
+    return null;
   }
 
   @Bean
@@ -59,25 +60,22 @@ public class CandidateService {
     return new PropertySourcesPlaceholderConfigurer();
   }
 
+  /**
+   * Scheduled task
+   */
   @Scheduled(cron = "${cron}")
   public void reportCurrentTime() {
     Calendar currentDate = new GregorianCalendar();
+    currentDate.add(Calendar.MONTH,-3);
     log.info(String.format("The time is now: %15s", dateFormat.format(new Date())));
-    int diff = 0;
     for(Candidate candidate: candidateRepository.findAllOrderByDate()) {
-      diff = diffInMonths(candidate.getDate(),currentDate);
-      log.info(String.format("Id: %5d name: %15s date: %15s diff in months: %5d",candidate.getId(),candidate.getName(), dateFormat.format(new Date(candidate.getDate().getTimeInMillis())),diff));
-      if (diff >= 3) {
+      if (currentDate.after(candidate.getDate())) {
+        log.info(String.format("Candidate will be deleted. Id: %5d name: %15s date: %15s.",candidate.getId(),candidate.getName(), dateFormat.format(new Date(candidate.getDate().getTimeInMillis()))));
         delete(candidate.getId());
       } else {
         break;
       }
     }
-  }
-
-  private int diffInMonths(Calendar candidateDate, Calendar currentCalendar) {
-    int diffYear = currentCalendar.get(Calendar.YEAR) - candidateDate.get(Calendar.YEAR);
-    return diffYear * 12 + currentCalendar.get(Calendar.MONTH) - candidateDate.get(Calendar.MONTH);
   }
 
 }

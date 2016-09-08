@@ -18,6 +18,7 @@ public class Candidate {
   @JsonProperty
   @Id
   @GeneratedValue( strategy = GenerationType.AUTO)
+  @Column(name = "ID", columnDefinition = "bigint")
   private BigInteger id;
 
   @NotNull
